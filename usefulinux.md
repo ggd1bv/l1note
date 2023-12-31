@@ -57,3 +57,65 @@
 > sort data.txt | uniq -u
 
 
+**String command**
+> strings data.txt
+> strings data.txt | grep ==
+
+**Base64 command**
+- base64 -d, for decoding
+> base64 -d data.txt
+
+**ROT13 command**
+- base64 -d, for decoding
+> tr <old_chars> <new_chars>
+> cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+
+**ROT13 & ROT5 command**
+- base64 -d, for decoding
+> alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
+> alias rot5="tr '0-9' '5-90-4'"
+
+**Hexdumps (volcados hexadecimales) & Compression**
+- xxd <input_file> <output_file> creates hexdumps. 
+- xxd -r , it reverts the hexdump.
+- gzip (-d) | ext .gz
+- bzip2 (-d) | ext .bz2
+- tar -cf, to create .tar
+- tar -xf, to extract .tar
+- file data
+```
+bandit12@bandit:~$ mkdir /tmp/random_dir
+bandit12@bandit:~$ cd /tmp/random_dir
+bandit12@bandit:/tmp/random_dir$
+bandit12@bandit:/tmp/random_dir$ cp ~/data.txt .
+bandit12@bandit:/tmp/random_dir$ mv data.txt data
+
+*xxd to convert the data into its binary equivalent
+
+bandit12@bandit:/tmp/random_dir$ file binary
+binary: gzip compressed data, was "data2.bin", last modified: Thu Oct  5 06:19:20 2023, max compression, from Unix, original size modulo 2^32 573
+
+bandit12@bandit:/tmp/random_dir$ mv binary binary.gz
+bandit12@bandit:/tmp/random_dir$ gzip -d binary.gz
+bandit12@bandit:/tmp/random_dir$ file binary
+binary: bzip2 compressed data, block size = 900k
+
+bandit12@bandit:/tmp/random_dir$ mv binary binary.gz
+bandit12@bandit:/tmp/random_dir$ gzip -d binary.gz
+bandit12@bandit:/tmp/random_dir$ file binary
+binary: bzip2 compressed data, block size = 900k
+
+bandit12@bandit:/tmp/random_dir$ mv binary binary.gz
+bandit12@bandit:/tmp/random_dir$ gzip -d binary.gz
+bandit12@bandit:/tmp/random_dir$ file binary
+binary: POSIX tar archive (GNU)
+
+bandit12@bandit:/tmp/random_dir$ tar -xf binary
+bandit12@bandit:/tmp/random_dir$ ls
+binary  data  data5.bin
+bandit12@bandit:/tmp/random_dir$ file data5.bin
+data5.bin: POSIX tar archive (GNU)
+
+
+```
+
