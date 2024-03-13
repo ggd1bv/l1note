@@ -1,12 +1,12 @@
-** UPDATE **
-• sudo apt update
-• sudo apt upgrade
+# UPDATE
+> sudo apt update
+> sudo apt upgrade
 
-- - - CAMBIAR PORT SSH
-•  /etc/ssh/sshd_config
-•  port 13970 o 2223 
-•  sudo /etc/init.d/ssh restart
-•  ssh -p 13970 ubuntu@ip...
+# CAMBIAR PORT SSH
+>  /etc/ssh/sshd_config
+>  port 13970 o 2223 
+>  sudo /etc/init.d/ssh restart
+>  ssh -p 13970 ubuntu@ip...
 
 - - - HABILITAR FIREWALL
 • sudo ufw allow OpenSSH
