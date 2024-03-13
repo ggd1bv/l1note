@@ -1,23 +1,28 @@
 # UPDATE
-> sudo apt update
-> sudo apt upgrade
+sudo apt update
+
+sudo apt upgrade
 
 # CAMBIAR PORT SSH
->  /etc/ssh/sshd_config
->  port 13970 o 2223 
->  sudo /etc/init.d/ssh restart
->  ssh -p 13970 ubuntu@ip...
+/etc/ssh/sshd_config
 
-- - - HABILITAR FIREWALL
-• sudo ufw allow OpenSSH
-• sudo ufw allow 13970/tcp (el port ssh)
-• sudo ufw enable
+port 13970 o 2223
 
-- - - CAMBIAR PASS ROOT
-• sudo passwd root
-• 20*23!R1v3rPl4t3$
+sudo /etc/init.d/ssh restart
 
-- - - CAMBIAR USUARIO DEFAULT
+ssh -p 13970 ubuntu@ip...
+
+# HABILITAR FIREWALL
+sudo ufw allow OpenSSH
+
+sudo ufw allow 13970/tcp (el port ssh)
+
+sudo ufw enable
+
+# CAMBIAR PASS ROOT
+sudo passwd root
+
+# CAMBIAR USUARIO DEFAULT
 Permite que las cuentas ejecuten comandos como otras cuentas, incluida la raíz . 
 
 * Usuarios que forman parte del grupo Sudo
