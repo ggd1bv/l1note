@@ -26,11 +26,15 @@ sudo passwd root
 Permite que las cuentas ejecuten comandos como otras cuentas, incluida la raíz . 
 
 * Usuarios que forman parte del grupo Sudo
+
 cat /etc/group | grep "sudo"
+
 *Crear grupo:
 sudo groupadd sudousers
+
 *Añadir cuentas
  sudo usermod -a -G sudousers user1
+
  sudo usermod -a -G sudousers user2
 
 *Copia de seguridad del archivo de configuración de sudo /etc/sudoers
@@ -38,55 +42,75 @@ sudo groupadd sudousers
 
 * En caso de que no hayamos instalado el sistema nosotros
  sudo adduser newUser  
+
  sudo adduser newUser sudo  ( usermod -aG sudo lau ) 
+
  ssh -p 13970 newUser@ip...
 
-- - - RESTRICCIONES SSH
+# RESTRICCIONES SSH
  sudo vi /etc/ssh/sshd_config
+
  LoginGraceTime : 2m
+
  StrictMode : yes
+
  MaxAuthTries: 5
+
  MaxSessions: 2 ( o la cantidad de usuarios que van a acceder)
+
  sudo /etc/init.d/ssh restart
 
-- - - LIMITAR QUIÉNES USAN SU
+
+# LIMITAR QUIÉNES USAN SU
 Permite que las cuentas ejecuten comandos como otras cuentas, incluida la raíz .
  sudo groupadd suusers
+
  sudo usermod -a -G suusers user1
+
 * Solo los usuarios de este grupo puedan ejecutar /binsu:
+
  sudo dpkg-statoverride --update --add root suusers 4750 /bin/su
 
 
-
-- - - FORZAR INICIO CON SSH
-
+# FORZAR INICIO CON SSH
 La clave pública se transfiere al servidor mientras que la clave privada permanece en nuestra computadora local.
 
-# Generar clave en CLIENTE (no en el servidor)
+# Generar clave en CLIENTE (en el cliente, no en el server)
  ssh-keygen -t rsa -b 4096 -C "your@email.com"
+
 - Default: /home/newUser/.ssh/id_rsa
+
  Resguadar la clave
+
  chmod 600 id_rsa
 
 # En el Servidor
  mkdir ~/.ssh (Crear carpeta)
+
  vim ~/.ssh/authorized_keys (Crear archivo)
 
 - Pegar el contenido de la clave pública, si se usa el nombre default:
  id_rsa.pub
+
  /etc/ssh/sshd_config
+
  PubkeyAuthentication: yes
+
  sudo /etc/init.d/ssh restart
+
  exit
+
 - Verificar acceso:
  ssh -p 13970 -i path/to/your/private/key/id_rsa newUser@ip...
 
 - En caso que se pueda entrar sin que pida la clave procedemos a deshabilitar el acceso con contraseña:
  /etc/ssh/sshd_config
+
  PasswordAuthentication: no
+
  /etc/init.d/ssh restart
 
-- - - FAIL2BAN
+# FAIL2BAN
  sudo apt install fail2ban
 - Archivos de configuración en: 
  /etc/fail2ban
