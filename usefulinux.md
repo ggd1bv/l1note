@@ -17,6 +17,10 @@
 > cat .hiddenFile
 > cat folder/.hiddenFile
 
+**Install | Uninstall .DEB (ubuntu)**
+> sudo dpkg -i DEB_PACKAGE
+> sudo dpkg -r PACKAGE_NAME
+
 **ELF Files (not human-readable)**
 > �������$��$,0�%��0�'��
 
